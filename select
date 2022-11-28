@@ -1,4 +1,3 @@
-
 WITH ITEMS AS
 
 (
@@ -10,6 +9,8 @@ WITH ITEMS AS
     , CAT.CAT_CATEG_NAME_L2
     , CAT.CAT_CATEG_NAME_L3
     , CAT.CAT_CATEG_NAME_L4
+    , LOC.ITE_ADD_STATE_NAME
+    , C.CBO_DESCRIPTION_CLASSI
 
   FROM `meli-bi-data.WHOWNER.LK_ITE_ITEMS` AS A
 
@@ -18,6 +19,27 @@ WITH ITEMS AS
 	ON    CAT.CAT_CATEG_ID_L7 = CAST(A.CAT_CATEG_ID AS INTEGER)
 	AND CAT.SIT_SITE_ID = A.SIT_SITE_ID
   AND CAT.CAT_CATEG_ID_L1 IN (1743,1459) -- REAL ESTATE Y MOTORS
+
+  -- TRAIGO TIPO DE PUBLICACION: GRATIS, ORO, ETC
+  LEFT JOIN `meli-bi-data.WHOWNER.LK_CBO_COMBOS_CLASSIFIEDS` AS C 
+  ON CAST(A.ITE_ITEM_COMBO_ID AS NUMERIC) = C.CBO_COMBO_CLASSI_ID -- lo uno con la foreign key para evitar duplicar datos
+
+   -- LE AGREGO DATOS DE LOCATION
+  LEFT JOIN 
+      (
+      SELECT 	
+            SIT_SITE_ID
+          , ITE_ITEM_ID
+          -- , ITE_ADD_CITY_NAME
+          , ITE_ADD_STATE_NAME
+
+        FROM `meli-bi-data.WHOWNER.LK_ITE_ITEM_ADDRESS`
+        
+        QUALIFY ROW_NUMBER() OVER (PARTITION BY SIT_SITE_ID, ITE_ITEM_ID ORDER BY AUD_INS_DT DESC) = 1
+
+      ) AS LOC
+  ON A.SIT_SITE_ID = LOC.SIT_SITE_ID
+  AND A.ITE_ITEM_ID = LOC.ITE_ITEM_ID
 
 )
 
@@ -155,6 +177,14 @@ SELECT
           WHEN ( SELECT UPPER(MAX(value)) FROM hits.customDimensions WHERE index=8 ) in ('REAL_ESTATE') THEN 'REAL ESTATE'
           WHEN ( SELECT UPPER(MAX(value)) FROM hits.customDimensions WHERE index=8 ) in ('SERVICES') THEN 'SERVICES' END) AS VERTICAL
 
+  , (CASE WHEN REGEXP_CONTAINS(UPPER(ga_sessions.trafficSource.campaign),'.*_FB_*') THEN 'FB ADS'
+          WHEN REGEXP_CONTAINS(UPPER(ga_sessions.trafficSource.campaign),'.*_G_*') THEN 'GOOGLE ADS'
+          ELSE 'Other' END) AS FB_OR_G
+
+  , ITE_ADD_STATE_NAME
+
+  , CBO_DESCRIPTION_CLASSI
+
   , UPPER(hits.eventInfo.eventAction) AS EVENT_TYPE
 
   , COUNT(DISTINCT CASE WHEN (hits.type = 'EVENT') THEN (CONCAT(ga_sessions.id,'|',FORMAT('%05d',hits.hitNumber)))  ELSE NULL END) AS TOTAL_CONTACTS
@@ -186,7 +216,7 @@ WHERE ( SELECT UPPER(MAX(value)) FROM hits.customDimensions WHERE index=8 ) in (
   AND (C.POM_attribution IS NOT NULL OR D.POM_attribution IS NOT NULL)
 
 
-GROUP BY 1,2,3,4,5,6,7,8
+GROUP BY 1,2,3,4,5,6,7,8,9,10,11
 )
 
 SELECT A.*

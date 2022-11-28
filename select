@@ -22,7 +22,7 @@ WITH ITEMS AS
 
   -- TRAIGO TIPO DE PUBLICACION: GRATIS, ORO, ETC
   LEFT JOIN `meli-bi-data.WHOWNER.LK_CBO_COMBOS_CLASSIFIEDS` AS C 
-  ON CAST(A.ITE_ITEM_COMBO_ID AS NUMERIC) = C.CBO_COMBO_CLASSI_ID -- lo uno con la foreign key para evitar duplicar datos
+  ON CAST(A.ITE_ITEM_COMBO_ID AS STRING) = CAST(C.CBO_COMBO_CLASSI_ID AS STRING) -- lo uno con la foreign key para evitar duplicar datos
 
    -- LE AGREGO DATOS DE LOCATION
   LEFT JOIN 
@@ -52,8 +52,8 @@ WITH ITEMS AS
     FROM
     `79568999.ga_sessions_*`
     WHERE ((( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) ) >=
-    (TIMESTAMP('2022-11-15 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
-    <= (TIMESTAMP('2022-11-19 00:00:00'))))
+    (TIMESTAMP('2022-09-01 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
+    <= (TIMESTAMP('2022-11-27 00:00:00'))))
     UNION ALL
     --MLB
     SELECT *
@@ -62,8 +62,8 @@ WITH ITEMS AS
     FROM
     `79572943.ga_sessions_*`
     WHERE ((( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) ) >=
-    (TIMESTAMP('2022-11-15 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
-    <= (TIMESTAMP('2022-11-19 00:00:00'))))
+    (TIMESTAMP('2022-09-01 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
+    <= (TIMESTAMP('2022-11-27 00:00:00'))))
     UNION ALL
     -- MLU
     SELECT *
@@ -72,8 +72,8 @@ WITH ITEMS AS
     FROM
     `79569884.ga_sessions_*`
     WHERE ((( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) ) >=
-    (TIMESTAMP('2022-11-15 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
-    <= (TIMESTAMP('2022-11-19 00:00:00'))))
+    (TIMESTAMP('2022-09-01 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
+    <= (TIMESTAMP('2022-11-27 00:00:00'))))
     UNION ALL
     -- MLC
     SELECT *
@@ -82,8 +82,8 @@ WITH ITEMS AS
     FROM
     `79575411.ga_sessions_*`
     WHERE ((( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) ) >=
-    (TIMESTAMP('2022-11-15 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
-    <= (TIMESTAMP('2022-11-19 00:00:00'))))
+    (TIMESTAMP('2022-09-01 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
+    <= (TIMESTAMP('2022-11-27 00:00:00'))))
     UNION ALL
     -- PI
     SELECT *
@@ -92,8 +92,8 @@ WITH ITEMS AS
     FROM
     `171108187.ga_sessions_*`
     WHERE ((( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) ) >=
-    (TIMESTAMP('2022-11-15 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
-    <= (TIMESTAMP('2022-11-19 00:00:00'))))
+    (TIMESTAMP('2022-09-01 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
+    <= (TIMESTAMP('2022-11-27 00:00:00'))))
     UNION ALL
       --TuCarro
       SELECT *
@@ -102,8 +102,8 @@ WITH ITEMS AS
       FROM
       `79576307.ga_sessions_*`
       WHERE ((( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) ) >=
-      (TIMESTAMP('2022-11-15 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
-      <= (TIMESTAMP('2022-11-19 00:00:00'))))
+      (TIMESTAMP('2022-09-01 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
+      <= (TIMESTAMP('2022-11-27 00:00:00'))))
       UNION ALL
       --MCO
       SELECT *
@@ -112,8 +112,8 @@ WITH ITEMS AS
       FROM
       `79576008.ga_sessions_*`
       WHERE ((( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) ) >=
-      (TIMESTAMP('2022-11-15 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
-      <= (TIMESTAMP('2022-11-19 00:00:00'))))
+      (TIMESTAMP('2022-09-01 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
+      <= (TIMESTAMP('2022-11-27 00:00:00'))))
       UNION ALL
       --MLM
       SELECT *
@@ -122,8 +122,8 @@ WITH ITEMS AS
       FROM
       `79571586.ga_sessions_*`
       WHERE ((( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) ) >=
-      (TIMESTAMP('2022-11-15 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
-      <= (TIMESTAMP('2022-11-19 00:00:00'))))
+      (TIMESTAMP('2022-09-01 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
+      <= (TIMESTAMP('2022-11-27 00:00:00'))))
       UNION ALL
       --M3
       SELECT *
@@ -132,8 +132,8 @@ WITH ITEMS AS
       FROM
       `108964616.ga_sessions_*`
       WHERE ((( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) ) >=
-      (TIMESTAMP('2022-11-15 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
-      <= (TIMESTAMP('2022-11-19 00:00:00'))))
+      (TIMESTAMP('2022-09-01 00:00:00')) AND ( TIMESTAMP(PARSE_DATE('%Y%m%d', REGEXP_EXTRACT(_TABLE_SUFFIX,r'^\d\d\d\d\d\d\d\d'))) )
+      <= (TIMESTAMP('2022-11-27 00:00:00'))))
 )
 
 , A AS

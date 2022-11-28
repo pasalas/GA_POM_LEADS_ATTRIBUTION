@@ -210,7 +210,7 @@ LEFT JOIN `meli-bi-data.SBOX_MKTVIS.POM_ATTRIBUTION_ADGROUP` AS D
 ON UPPER(ga_sessions.trafficSource.campaign) = UPPER(D.trafficSource_campaign)
 AND UPPER(ga_sessions.trafficSource.adContent) = UPPER(D.Ad_Content)
 
-WHERE ( SELECT UPPER(MAX(value)) FROM hits.customDimensions WHERE index=8 ) in ('REAL_ESTATE')
+WHERE ( SELECT UPPER(MAX(value)) FROM hits.customDimensions WHERE index=8 ) in ('MOTORS','MOT','REAL_ESTATE','SERVICES')
   AND UPPER(hits.eventInfo.eventAction) in ('CALL','CONTACT','CONTACT_WHATSAPP','QUOTATION')
 
   --FILTRO TRAIGO SOLO LEADS RELACIONADOS A LAS TABLAS DE POM_ATTRIBUTION

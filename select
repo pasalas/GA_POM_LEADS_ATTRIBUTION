@@ -179,6 +179,7 @@ SELECT
 
   , (CASE WHEN REGEXP_CONTAINS(UPPER(ga_sessions.trafficSource.campaign),'.*_FB_*') THEN 'FB ADS'
           WHEN REGEXP_CONTAINS(UPPER(ga_sessions.trafficSource.campaign),'.*_G_*') THEN 'GOOGLE ADS'
+          WHEN REGEXP_CONTAINS(UPPER(ga_sessions.trafficSource.campaign),'.*_RTB_*') THEN 'RTB'
           ELSE 'Other' END) AS FB_OR_G
 
   , ITE_ADD_STATE_NAME
